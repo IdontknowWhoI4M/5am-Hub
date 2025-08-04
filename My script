@@ -1,0 +1,474 @@
+local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
+
+
+if CoreGui:FindFirstChild("FiveAMKeySystem") then
+    CoreGui.FiveAMKeySystem:Destroy()
+end
+if CoreGui:FindFirstChild("FiveAMHub") then
+    CoreGui.FiveAMHub:Destroy()
+end
+if CoreGui:FindFirstChild("ToggleGuiButton") then
+    CoreGui.ToggleGuiButton:Destroy()
+end
+
+
+local KEY = "Quiwii314"
+local CORRECT_PLACE_ID = 93557410403539
+
+
+local function showNotification(message)
+    StarterGui:SetCore("SendNotification", {
+        Title = "FiveAM Hub",
+        Text = message,
+        Duration = 3
+    })
+end
+
+
+if game.PlaceId ~= CORRECT_PLACE_ID then
+    showNotification("Wrong Game! Script not loaded.")
+    return
+end
+
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "FiveAMKeySystem"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = CoreGui
+
+-- Main Frame
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 400, 0, 200)
+Frame.Position = UDim2.new(0.5, -200, 0.5, -100)
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.BorderColor3 = Color3.fromRGB(100, 100, 100)
+Frame.BorderSizePixel = 2
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -40, 0, 35)
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "5AM Hub Key System"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.GothamBold
+Title.TextScaled = true
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = Frame
+
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 2)
+closeBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+closeBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+closeBtn.BorderSizePixel = 2
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 20
+closeBtn.Parent = Frame
+
+closeBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(0, 300, 0, 40)
+keyBox.Position = UDim2.new(0.5, -150, 0, 50)
+keyBox.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+keyBox.BorderColor3 = Color3.fromRGB(100, 100, 100)
+keyBox.BorderSizePixel = 2
+keyBox.PlaceholderText = "Enter Key Here"
+keyBox.Text = ""
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.Font = Enum.Font.Gotham
+keyBox.TextSize = 18
+keyBox.ClearTextOnFocus = false
+keyBox.Parent = Frame
+
+
+local checkBtn = Instance.new("TextButton")
+checkBtn.Size = UDim2.new(0, 140, 0, 40)
+checkBtn.Position = UDim2.new(0.5, -150, 0, 110)
+checkBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+checkBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+checkBtn.BorderSizePixel = 2
+checkBtn.Text = "Check Key"
+checkBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+checkBtn.Font = Enum.Font.GothamBold
+checkBtn.TextSize = 18
+checkBtn.Parent = Frame
+
+
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Size = UDim2.new(0, 140, 0, 40)
+getKeyBtn.Position = UDim2.new(0.5, 10, 0, 110)
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+getKeyBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+getKeyBtn.BorderSizePixel = 2
+getKeyBtn.Text = "Get Key"
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.Font = Enum.Font.GothamBold
+getKeyBtn.TextSize = 18
+getKeyBtn.Parent = Frame
+
+
+checkBtn.MouseButton1Click:Connect(function()
+    local inputKey = keyBox.Text
+    if inputKey == KEY then
+        showNotification("Valid Key! Loading Hub...")
+        ScreenGui:Destroy()
+        task.wait(1)
+
+        
+        
+        -- local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
+local Workspace = game:GetService("Workspace")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+
+if CoreGui:FindFirstChild("FiveAMHub") then
+    CoreGui.FiveAMHub:Destroy()
+end
+if CoreGui:FindFirstChild("ToggleGuiButton") then
+    CoreGui.ToggleGuiButton:Destroy()
+end
+
+
+local enemyNames = {
+    "Noob", "Baller", "Knight", "Paintballer",
+    "IceMage", "PaintballerElite", "ShockMage",
+    "KnightCaptain", "PaintballerCaptain", "ShockMageCaptain", "Frigidus"
+}
+
+
+getgenv().ESPEnabled = getgenv().ESPEnabled or false
+getgenv().EnemyAutofarm = getgenv().EnemyAutofarm or false
+
+
+local function notify(msg)
+    StarterGui:SetCore("SendNotification", {
+        Title = "FiveAM Hub",
+        Text = msg,
+        Duration = 3
+    })
+end
+
+
+local allItems = {
+    "Armor", "SpeedCoil", "Disruptor", "RegenCoil", "Chezburger", "Windforce",
+    "VikingHelmet", "Taco", "Tnt", "Magnet", "Pizza", "BattleArmor",
+    "Witches Brew", "DominoCrown", "Epicsauce", "BloxyCola", "TeddyBloxpin",
+    "BreathOfFire", "Bloxiade", "Cake"
+}
+
+
+local function createMainGui()
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "FiveAMHub"
+    ScreenGui.Parent = CoreGui
+
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 420, 0, 320)
+    MainFrame.Position = UDim2.new(0.5, -210, 0.5, -150)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    MainFrame.BorderColor3 = Color3.fromRGB(100, 100, 100)
+    MainFrame.BorderSizePixel = 2
+    MainFrame.Active = true
+    MainFrame.Draggable = true
+    MainFrame.Parent = ScreenGui
+
+    
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, -40, 0, 35)
+    Title.Position = UDim2.new(0, 10, 0, 0)
+    Title.BackgroundTransparency = 1
+    Title.Text = "5AM Hub"
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.Font = Enum.Font.GothamBold
+    Title.TextScaled = true
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+    Title.Parent = MainFrame
+
+    
+    local CloseBtn = Instance.new("TextButton")
+    CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+    CloseBtn.Position = UDim2.new(1, -35, 0, 2)
+    CloseBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    CloseBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+    CloseBtn.BorderSizePixel = 2
+    CloseBtn.Text = "X"
+    CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    CloseBtn.Font = Enum.Font.GothamBold
+    CloseBtn.TextSize = 20
+    CloseBtn.Parent = MainFrame
+
+    CloseBtn.MouseButton1Click:Connect(function()
+        ScreenGui:Destroy()
+        
+        local toggleGui = Instance.new("ScreenGui")
+        toggleGui.Name = "ToggleGuiButton"
+        toggleGui.Parent = CoreGui
+
+        local circleBtn = Instance.new("TextButton")
+        circleBtn.Size = UDim2.new(0, 50, 0, 50)
+        circleBtn.Position = UDim2.new(0, 10, 0.5, -25)
+        circleBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        circleBtn.Text = ">"
+        circleBtn.TextScaled = true
+        circleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        circleBtn.Font = Enum.Font.GothamBold
+        circleBtn.Parent = toggleGui
+
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(1, 0)
+        corner.Parent = circleBtn
+
+        circleBtn.MouseButton1Click:Connect(function()
+            toggleGui:Destroy()
+            createMainGui()
+        end)
+    end)
+
+    
+    local TabBar = Instance.new("Frame")
+    TabBar.Size = UDim2.new(1, 0, 0, 35)
+    TabBar.Position = UDim2.new(0, 0, 0, 35)
+    TabBar.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    TabBar.BorderColor3 = Color3.fromRGB(100, 100, 100)
+    TabBar.BorderSizePixel = 2
+    TabBar.Parent = MainFrame
+
+    local tabs = {"Main", "Get Fighter"}
+    local tabButtons = {}
+    local tabWidth = MainFrame.Size.X.Offset / #tabs
+    local contentFrames = {}
+
+    for i, name in ipairs(tabs) do
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, tabWidth, 1, 0)
+        btn.Position = UDim2.new(0, (i-1)*tabWidth, 0, 0)
+        btn.BackgroundColor3 = (i == 1) and Color3.fromRGB(30, 30, 30) or Color3.fromRGB(20, 20, 20)
+        btn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+        btn.BorderSizePixel = 2
+        btn.Text = name
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 16
+        btn.Parent = TabBar
+        tabButtons[name] = btn
+
+        local content = Instance.new("ScrollingFrame")
+        content.Size = UDim2.new(1, -20, 1, -80)
+        content.Position = UDim2.new(0, 10, 0, 75)
+        content.BackgroundTransparency = 1
+        content.ScrollBarThickness = 6
+        content.Visible = (i == 1)
+        content.CanvasSize = UDim2.new(0, 0, 0, 1300)
+        content.Parent = MainFrame
+        contentFrames[name] = content
+    end
+
+    
+    for name, button in pairs(tabButtons) do
+        button.MouseButton1Click:Connect(function()
+            for n, frame in pairs(contentFrames) do
+                frame.Visible = false
+                tabButtons[n].BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+            end
+            contentFrames[name].Visible = true
+            button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        end)
+    end
+
+    
+    local mainFrame = contentFrames["Main"]
+
+    local function createButton(text, yPos, callback)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, 200, 0, 40)
+        btn.Position = UDim2.new(0.5, -100, 0, yPos)
+        btn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        btn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+        btn.BorderSizePixel = 2
+        btn.Text = text
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 18
+        btn.Parent = mainFrame
+        btn.MouseButton1Click:Connect(callback)
+    end
+
+    
+    createButton("Get All Items", 10, function()
+        for _, item in ipairs(allItems) do
+            game.ReplicatedStorage.PlrMan.Items.PickupItem:FireServer(item)
+            task.wait(0.1)
+        end
+        notify("All items collected!")
+    end)
+
+    local yPos = 60
+    for _, item in ipairs(allItems) do
+        createButton(item, yPos, function()
+            game.ReplicatedStorage.PlrMan.Items.PickupItem:FireServer(item)
+            notify(item .. " Collected!")
+        end)
+        yPos = yPos + 50
+    end
+
+    
+    local autofarmBtn = Instance.new("TextButton")
+    autofarmBtn.Size = UDim2.new(0, 200, 0, 40)
+    autofarmBtn.Position = UDim2.new(0.5, -100, 0, yPos)
+    autofarmBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    autofarmBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+    autofarmBtn.BorderSizePixel = 2
+    autofarmBtn.Text = getgenv().EnemyAutofarm and "EnemyAutofarm [ON]" or "EnemyAutofarm [OFF]"
+    autofarmBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    autofarmBtn.Font = Enum.Font.GothamBold
+    autofarmBtn.TextSize = 18
+    autofarmBtn.Parent = mainFrame
+
+    autofarmBtn.MouseButton1Click:Connect(function()
+        getgenv().EnemyAutofarm = not getgenv().EnemyAutofarm
+        autofarmBtn.Text = getgenv().EnemyAutofarm and "EnemyAutofarm [ON]" or "EnemyAutofarm [OFF]"
+        notify(getgenv().EnemyAutofarm and "Enemy Autofarm Enabled" or "Enemy Autofarm Disabled")
+    end)
+
+    yPos = yPos + 50
+
+    
+    local espBtn = Instance.new("TextButton")
+    espBtn.Size = UDim2.new(0, 200, 0, 40)
+    espBtn.Position = UDim2.new(0.5, -100, 0, yPos)
+    espBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    espBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+    espBtn.BorderSizePixel = 2
+    espBtn.Text = getgenv().ESPEnabled and "ESP [ON]" or "ESP [OFF]"
+    espBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    espBtn.Font = Enum.Font.GothamBold
+    espBtn.TextSize = 18
+    espBtn.Parent = mainFrame
+
+    espBtn.MouseButton1Click:Connect(function()
+        getgenv().ESPEnabled = not getgenv().ESPEnabled
+        espBtn.Text = getgenv().ESPEnabled and "ESP [ON]" or "ESP [OFF]"
+        notify(getgenv().ESPEnabled and "ESP Enabled" or "ESP Disabled")
+    end)
+
+    
+    local fighterFrame = contentFrames["Get Fighter"]
+    local function createFighterButton(text, yPos, fighterName)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, 200, 0, 40)
+        btn.Position = UDim2.new(0.5, -100, 0, yPos)
+        btn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+        btn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+        btn.BorderSizePixel = 2
+        btn.Text = text
+        btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 18
+        btn.Parent = fighterFrame
+
+        btn.MouseButton1Click:Connect(function()
+            LocalPlayer.PlayerGui.ScreenUI.SetActiveFighter:FireServer(fighterName)
+            notify(fighterName .. " earned successfully!")
+        end)
+    end
+
+    createFighterButton("Icarus", 10, "Icarus")
+    createFighterButton("DoomBringer", 60, "DoomBringer")
+    createFighterButton("Get Miked", 110, "Miked")
+end
+
+
+createMainGui()
+
+
+task.spawn(function()
+    while true do
+        if getgenv().ESPEnabled then
+            for _, enemy in ipairs(Workspace.Enemies:GetChildren()) do
+                if enemy:IsA("Model") and table.find(enemyNames, enemy.Name) then
+                    if not enemy:FindFirstChild("Highlight") then
+                        local hl = Instance.new("Highlight")
+                        hl.FillColor = Color3.fromRGB(255, 0, 0)
+                        hl.OutlineColor = Color3.fromRGB(255, 255, 255)
+                        hl.Parent = enemy
+                    end
+                end
+            end
+        else
+            for _, enemy in ipairs(Workspace.Enemies:GetChildren()) do
+                if enemy:FindFirstChild("Highlight") then
+                    enemy.Highlight:Destroy()
+                end
+            end
+        end
+        task.wait(1)
+    end
+end)
+
+
+task.spawn(function()
+    while true do
+        if getgenv().EnemyAutofarm then
+            local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                for _, enemy in ipairs(Workspace.Enemies:GetChildren()) do
+                    if not getgenv().EnemyAutofarm then break end
+                    if enemy:IsA("Model") and table.find(enemyNames, enemy.Name) and enemy:FindFirstChild("HumanoidRootPart") then
+                        local humanoid = enemy:FindFirstChildOfClass("Humanoid")
+                        if humanoid and humanoid.Health > 0 then
+                            hrp.CFrame = enemy.HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
+                            task.wait(0.1)
+                            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                            task.wait(0.1)
+                            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+                        end
+                    end
+                end
+            end
+        end
+        task.wait(0.3)
+    end
+end)
+
+
+task.spawn(function()
+    while true do
+        local char = LocalPlayer.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        if hum and hum.Health > 0 and hum.MaxHealth > 0 then
+            if hum.Health / hum.MaxHealth <= 0.4 then
+                notify("Low HP! Using Chicken...")
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                task.wait(0.1)
+                VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+                task.wait(3)
+            end
+        end
+        task.wait(0.5)
+    end
+end)
+
+    else
+        showNotification("Invalid Key!")
+    end
+end)
+
+getKeyBtn.MouseButton1Click:Connect(function()
+    setclipboard("https://link-center.net/1201490/Ab0bLYoaLzeb")
+    showNotification("Link copied to clipboard Please paste the link into your Browser!")
+end)
