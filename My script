@@ -361,11 +361,31 @@ local function createMainGui()
     espBtn.Parent = mainFrame
 
     espBtn.MouseButton1Click:Connect(function()
-        getgenv().ESPEnabled = not getgenv().ESPEnabled
-        espBtn.Text = getgenv().ESPEnabled and "ESP [ON]" or "ESP [OFF]"
-        notify(getgenv().ESPEnabled and "ESP Enabled" or "ESP Disabled")
-    end)
+    getgenv().ESPEnabled = not getgenv().ESPEnabled
+    espBtn.Text = getgenv().ESPEnabled and "ESP [ON]" or "ESP [OFF]"
+    notify(getgenv().ESPEnabled and "ESP Enabled" or "ESP Disabled")
+end)
 
+yPos = yPos + 50
+
+-- ✅ AutoSkip Toggle Button
+local autoSkipBtn = Instance.new("TextButton")
+autoSkipBtn.Size = UDim2.new(0, 200, 0, 40)
+autoSkipBtn.Position = UDim2.new(0.5, -100, 0, yPos)
+autoSkipBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+autoSkipBtn.BorderColor3 = Color3.fromRGB(100, 100, 100)
+autoSkipBtn.BorderSizePixel = 2
+autoSkipBtn.Text = getgenv().AutoSkipEnabled and "AutoSkip [ON]" or "AutoSkip [OFF]"
+autoSkipBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+autoSkipBtn.Font = Enum.Font.GothamBold
+autoSkipBtn.TextSize = 18
+autoSkipBtn.Parent = mainFrame
+
+autoSkipBtn.MouseButton1Click:Connect(function()
+    getgenv().AutoSkipEnabled = not getgenv().AutoSkipEnabled
+    autoSkipBtn.Text = getgenv().AutoSkipEnabled and "AutoSkip [ON]" or "AutoSkip [OFF]"
+    notify(getgenv().AutoSkipEnabled and "AutoSkip Enabled" or "AutoSkip Disabled")
+end)
     
     local fighterFrame = contentFrames["Get Fighter"]
     local function createFighterButton(text, yPos, fighterName)
@@ -467,6 +487,25 @@ end)
         showNotification("Invalid Key!")
     end
 end)
+task.spawn(function()
+    while true do
+        if getgenv().AutoSkipEnabled then
+            local success, err = pcall(function()
+                local skipEvent = game:GetService("Players").LocalPlayer
+                    :WaitForChild("PlayerGui")
+                    :WaitForChild("HUD")
+                    :WaitForChild("RoundTimeUI")
+                    :WaitForChild("RoundTimeUI")
+                    :WaitForChild("VoteSkip")
+                if skipEvent then
+                    skipEvent:FireServer()
+                end
+            end)
+        end
+        task.wait(5) -- Every 5 seconds
+    end
+end)
+
 
 getKeyBtn.MouseButton1Click:Connect(function()
     setclipboard("https://link-center.net/1201490/Ab0bLYoaLzeb")
